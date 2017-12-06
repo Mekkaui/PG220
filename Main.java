@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -55,7 +56,12 @@ class Main {
        System.out.println("|             | J+0 | J+1 | J+2 | J+3 |");
        System.out.println("+-------------+-----+-----+-----+-----+");       
        System.out.println("Field \"title\"");
-       System.out.println(obj2.get("title"));    
+       System.out.println(obj2.get("title"));
+       
+       
+       MetaWeather meta = new MetaWeather(2);
+       meta.update(args[0]);
+       System.out.println("J+0 temp " + meta.get_t(0) + " humidity "+ meta.get_h(0) + " wind " + meta.get_w(0));
 
 
     }catch(ParseException pe){

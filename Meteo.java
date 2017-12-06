@@ -1,27 +1,27 @@
 
 abstract class Meteo {
-		  protected int t[];
+		  protected double t[];
 
-		  protected int h[];
+		  protected long h[];
 		  
 		  protected int nb_days;
 		  
-		  protected int v[];
+		  protected double w[];
 		  
 		  public Meteo(int nb_days){
 			  this.nb_days = nb_days;
-			  this.t = new int[nb_days];
-			  this.h = new int[nb_days];
-			  this.v = new int[nb_days];
+			  this.t = new double[nb_days];
+			  this.h = new long[nb_days];
+			  this.w = new double[nb_days];
 		  }
-		  int get_temp(int day){
+		  public double get_temp(int day){
 			  return this.t[day];
 		  }
-		  int get_humdity(int day){
+		  public long get_humdity(int day){
 			  return this.h[day];
 		  }
-		  int get_vitesse(int day){
-			  return this.v[day];
+		  public double get_vitesse(int day){
+			  return this.w[day];
 		  }
 
 		  

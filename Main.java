@@ -27,8 +27,8 @@ class Main {
     con.setRequestProperty("User-Agent", USER_AGENT);
 
     int responseCode = con.getResponseCode();
-    System.out.println("\nSending 'GET' request to URL : " + url);
-    System.out.println("Response Code : " + responseCode);
+    //System.out.println("\nSending 'GET' request to URL : " + url);
+    //System.out.println("Response Code : " + responseCode);
 
     BufferedReader in = new BufferedReader(
             new InputStreamReader(con.getInputStream()));
@@ -40,28 +40,33 @@ class Main {
     }
     in.close();
     
-    System.out.println(response.toString());
+    //System.out.println(response.toString());
     JSONParser parser = new JSONParser();
 		
     try{
        Object z = parser.parse(response.toString());
        JSONArray array = (JSONArray)z;
 			
-       System.out.println("The 2nd element of array");
+       /*System.out.println("The 2nd element of array");
        System.out.println(array.get(0));
-       System.out.println();
+       System.out.println();*/
 
        JSONObject obj2 = (JSONObject)array.get(0);
        System.out.println("+-------------+-----+-----+-----+-----+");
        System.out.println("|             | J+0 | J+1 | J+2 | J+3 |");
        System.out.println("+-------------+-----+-----+-----+-----+");       
-       System.out.println("Field \"title\"");
-       System.out.println(obj2.get("title"));
+       /*System.out.println("Field \"title\"");
+       System.out.println(obj2.get("title"));*/
+       
+       
        
        
        MetaWeather meta = new MetaWeather(2);
-       meta.update(args[0]);
-       System.out.println("J+0 temp " + meta.get_t(0) + " humidity "+ meta.get_h(0) + " wind " + meta.get_w(0));
+       for (int i =0; i<meta.t.length; i++) {
+    	   meta.update(args[0]);
+    	   System.out.println("J+0 temp " + (int)meta.get_t(i) + " humidity "+ meta.get_h(i) + " wind " + (int)meta.get_w(i));   
+       }
+
 
 
     }catch(ParseException pe){

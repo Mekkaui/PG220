@@ -24,4 +24,32 @@ public abstract class Meteo {
 	public double get_w(int day){
 		return this.w[day];
 	}
+	public void description(String title,int h_y,int w_y){
+		System.out.print("+-------------+");
+		for (int i =0;i<this.nb_days;i++){
+			System.out.print("--------+");
+		}
+		System.out.println("");
+		
+		
+		System.out.print(title);
+		for (int i =0;i<this.nb_days;i++){
+			System.out.print("  "+String.format("%02d", (int)this.t[i])+"°   |");
+		}
+		if(h_y!=0){
+			System.out.println("");
+			System.out.print("|             |");
+			for (int i =0;i<this.nb_days;i++){
+				System.out.print("  "+  String.format("%02d", (int)this.h[i]) +"%   |");
+			}
+		}
+		if(w_y!=0){
+			System.out.println("");
+			System.out.print("|             |");
+			for (int i =0;i<this.nb_days;i++){
+				System.out.print(" "+String.format("%02d", (int)this.w[i])+"km/h |");
+			}
+		}
+		System.out.println("");
+	}
 }

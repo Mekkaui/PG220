@@ -52,16 +52,30 @@ class Main {
        System.out.println();*/
 
        JSONObject obj2 = (JSONObject)array.get(0);
-       System.out.println("+-------------+-----+-----+-----+-----+");
-       System.out.println("|             | J+0 | J+1 | J+2 | J+3 |");
-       System.out.println("+-------------+-----+-----+-----+-----+");       
+       int nb_days = 2;
+       int h_y=1;
+       int w_y=1;
+       System.out.print("+-------------+");
+       for (int i =0;i<nb_days;i++){
+    	   System.out.print("--------+");
+       }
+       System.out.println("");
+       System.out.print("|             |");
+       for (int i =0;i<nb_days;i++){
+    	   System.out.print("  J+"+i+"   |");
+       }
+       System.out.println("");
+    
+       
        /*System.out.println("Field \"title\"");
        System.out.println(obj2.get("title"));*/
        
        
        
        
-       MetaWeather meta = new MetaWeather(2);
+       MetaWeather meta = new MetaWeather(nb_days);
+       meta.update(args[0]);
+       meta.description("| MetaWeather |", h_y, w_y);
        for (int i =0; i<meta.t.length; i++) {
     	   meta.update(args[0]);
     	   System.out.println("J+0 temp " + (int)meta.get_t(i) + " humidity "+ meta.get_h(i) + " wind " + (int)meta.get_w(i));   

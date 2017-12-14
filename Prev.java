@@ -33,9 +33,9 @@ public class Prev extends Meteo{
 					wind=wind+(long)(this_h.get("WNDSPD10m"));
 					humidity=humidity+(long)(this_h.get("RH2m"));
 				}
-				this.h[i]=humidity/24;
-				this.w[i]=(double)wind/24;
-				this.t[i]=(double)tmp;
+				this.h[i]=(int)(humidity/24);
+				this.w[i]=(int)(double)wind/24;
+				this.t[i]=(int)(double)tmp;
 
 			}
 			

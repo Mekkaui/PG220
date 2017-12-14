@@ -1,8 +1,11 @@
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -29,9 +32,6 @@ public class DataQuery {
 	    con.setRequestProperty("User-Agent", USER_AGENT);
 
 	    int responseCode = con.getResponseCode();
-	    //System.out.println("\nSending 'GET' request to URL : " + url);
-	    //System.out.println("Response Code : " + responseCode);
-
 	    BufferedReader in = new BufferedReader(
 	            new InputStreamReader(con.getInputStream()));
 	    String inputLine;
@@ -43,6 +43,13 @@ public class DataQuery {
 	    in.close();
 	    
 	   this.data=response.toString();
+	   
+	   FileWriter log = new FileWriter("requete.log",true);
+	   Date d = new Date();
+	   log.write("["+d.toString()+"] ["+responseCode+"]\n");
+	   log.write(url+"\n");
+	   log.write("");
+	   log.close();
 	    
 	}
 	public String getData(){

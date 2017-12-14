@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -15,6 +14,7 @@ class Main {
 	public static void main(String[] args) throws Exception{
 		int h_y=0;
 		int w_y=0;
+		int f_y=0;
 		int nb_days = 1;
 		String city="";
 		for(int i=0; i < args.length; i++) {
@@ -42,11 +42,16 @@ class Main {
 
 		MetaWeather meta = new MetaWeather(nb_days);
 		meta.update(city);
-		meta.description("| MetaWeather |", h_y, w_y);
+		meta.description("| MetaWeather |", h_y, w_y,f_y);
 
 		Prev prev = new Prev(nb_days);
 		prev.update(city);
-		prev.description("|   P-Meteo   |", h_y, w_y);
+		prev.description("|   P-Meteo   |", h_y, w_y,f_y);
+		
+		Yahoo yaho = new Yahoo(nb_days);
+		yaho.update(city);
+		yaho.description("|   Yahoo     |", h_y, w_y,f_y);
+		
 		last_line(nb_days);
 
 	}

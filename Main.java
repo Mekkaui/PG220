@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -27,8 +26,7 @@ class Main {
     con.setRequestProperty("User-Agent", USER_AGENT);
 
     int responseCode = con.getResponseCode();
-    //System.out.println("\nSending 'GET' request to URL : " + url);
-    //System.out.println("Response Code : " + responseCode);
+    
 
     BufferedReader in = new BufferedReader(
             new InputStreamReader(con.getInputStream()));
@@ -40,19 +38,14 @@ class Main {
     }
     in.close();
     
-    //System.out.println(response.toString());
     JSONParser parser = new JSONParser();
 		
     try{
        Object z = parser.parse(response.toString());
        JSONArray array = (JSONArray)z;
-			
-       /*System.out.println("The 2nd element of array");
-       System.out.println(array.get(0));
-       System.out.println();*/
 
        JSONObject obj2 = (JSONObject)array.get(0);
-       int nb_days = 2;
+       int nb_days = 4;
        int h_y=1;
        int w_y=1;
        System.out.print("+-------------+");
@@ -66,22 +59,18 @@ class Main {
        }
        System.out.println("");
     
-       
-       /*System.out.println("Field \"title\"");
-       System.out.println(obj2.get("title"));*/
-       
-       
-       
-       
+           
        MetaWeather meta = new MetaWeather(nb_days);
        meta.update(args[0]);
        meta.description("| MetaWeather |", h_y, w_y);
-       for (int i =0; i<meta.t.length; i++) {
-    	   meta.update(args[0]);
-    	   System.out.println("J+0 temp " + (int)meta.get_t(i) + " humidity "+ meta.get_h(i) + " wind " + (int)meta.get_w(i));   
-       }
+      
+       Yahoo yaho = new Yahoo(nb_days);
+       yaho.update(args[0]);
+       yaho.description("| Yahoo       |", h_y, w_y);
 
-
+       Prev pre = new Prev(nb_days);
+       pre.update(args[0]);
+       pre.description("| P-Meteo     |", h_y, w_y);
 
     }catch(ParseException pe){
 		

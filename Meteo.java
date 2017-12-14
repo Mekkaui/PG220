@@ -1,5 +1,3 @@
-
-
 public abstract class Meteo {
 	protected double t[];
 
@@ -40,14 +38,28 @@ public abstract class Meteo {
 			System.out.println("");
 			System.out.print("|             |");
 			for (int i =0;i<this.nb_days;i++){
-				System.out.print("  "+  String.format("%02d", (int)this.h[i]) +"%   |");
+				if (this.h[i] == -1)
+				{
+					System.out.print("  "+"--"+"    |");
+				}
+				else
+				{
+					System.out.print("  "+  String.format("%02d", (int)this.h[i]) +"%   |");
+				}
 			}
 		}
 		if(w_y!=0){
 			System.out.println("");
 			System.out.print("|             |");
 			for (int i =0;i<this.nb_days;i++){
-				System.out.print(" "+String.format("%02d", (int)this.w[i])+"km/h |");
+				if (this.h[i] == -1)
+				{
+					System.out.print("  "+"--"+"    |");
+				}
+				else
+				{
+					System.out.print(" "+String.format("%02d", (int)this.w[i])+"km/h |");
+				}
 			}
 		}
 		System.out.println("");

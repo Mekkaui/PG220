@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -66,21 +65,17 @@ class Main {
        }
        System.out.println("");
     
-       
-       /*System.out.println("Field \"title\"");
-       System.out.println(obj2.get("title"));*/
-       
-       
-       
-       
+           
        MetaWeather meta = new MetaWeather(nb_days);
        meta.update(args[0]);
        meta.description("| MetaWeather |", h_y, w_y);
-       for (int i =0; i<meta.t.length; i++) {
+       /*for (int i =0; i<meta.t.length; i++) {
     	   meta.update(args[0]);
     	   System.out.println("J+0 temp " + (int)meta.get_t(i) + " humidity "+ meta.get_h(i) + " wind " + (int)meta.get_w(i));   
-       }
-
+       }*/
+       Yahoo yaho = new Yahoo(nb_days);
+       yaho.update(args[0]);
+       yaho.description("| Yahoo       |", h_y, w_y);
 
 
     }catch(ParseException pe){

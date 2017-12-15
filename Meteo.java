@@ -8,9 +8,7 @@ import java.util.Date;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public abstract class Meteo {
 	protected int t[];

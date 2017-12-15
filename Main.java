@@ -37,19 +37,38 @@ class Main {
 			}
 		  }
 		
+		MetaWeather meta = new MetaWeather(nb_days);
+		Prev prev = new Prev(nb_days);
+		Yahoo yaho = new Yahoo(nb_days);
+		try {
+			meta.update(city);
+		}
+		catch(Exception e) {
+			System.out.println("Error while getting datas from MetaWeather API.");
+		}
+		
+		try {
+			prev.update(city);
+		}
+		catch(Exception e) {
+				System.out.println("Error while getting datas from Prevision-Meteos API.");
+		}
+		
+		try {
+			yaho.update(city);
+		}
+		catch(Exception e) {
+			System.out.println("Error while getting datas from Yahoo API.");
+		}
+		
 		first_line(nb_days);
 
 
-		MetaWeather meta = new MetaWeather(nb_days);
-		meta.update(city);
-		meta.description("| MetaWeather |", h_y, w_y,f_y);
-
-		Prev prev = new Prev(nb_days);
-		prev.update(city);
-		prev.description("|   P-Meteo   |", h_y, w_y,f_y);
 		
-		Yahoo yaho = new Yahoo(nb_days);
-		yaho.update(city);
+		
+		
+		meta.description("| MetaWeather |", h_y, w_y,f_y);
+		prev.description("|   P-Meteo   |", h_y, w_y,f_y);
 		yaho.description("|   Yahoo     |", h_y, w_y,f_y);
 		
 		last_line(nb_days);

@@ -1,8 +1,3 @@
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 public class Prev extends Meteo{
 
 	public Prev(int nb){
@@ -10,48 +5,27 @@ public class Prev extends Meteo{
 	}
 	
 	void update(String city) throws Exception{
-		DataQuery query1 = new DataQuery("https://www.prevision-meteo.ch/services/json/"+city);
-		JSONParser line1 = new JSONParser();
-
-		try{
-			Object line1_obj = line1.parse(query1.getData());
-			JSONObject array = (JSONObject)line1_obj;
-
-
-			
+		String url = "https://www.prevision-meteo.ch/services/json/"+city;
+		Object line = parse_url(url);
 			for(int i=0;i<super.nb_days;i++)
 			{
-				JSONObject fcst_day = (JSONObject)array.get("fcst_day_"+i);
-				JSONObject h_data = (JSONObject)fcst_day.get("hourly_data");
+				Object fcst_day = parse_object (line,"fcst_day_"+i);
+				Object h_data = parse_object(fcst_day,"hourly_data");
 				long wind=0;
 				long humidity=0;
-				long tmp_max=(long)fcst_day.get("tmax");
-				long tmp_min=(long)fcst_day.get("tmin");
+				long tmp_max=(long)parse_object(fcst_day,"tmax");
+				long tmp_min=(long)parse_object(fcst_day,"tmin");
 				long tmp=(tmp_max+tmp_min)/2;
 				for (int j=0;j<24;j++){
-					JSONObject this_h = (JSONObject)h_data.get(j+"H00");
-					wind=wind+(long)(this_h.get("WNDSPD10m"));
-					humidity=humidity+(long)(this_h.get("RH2m"));
+					Object this_h = parse_object(h_data,j+"H00");
+					wind=wind+(long)parse_object(this_h,"WNDSPD10m");
+					humidity=humidity+(long)parse_object(this_h,"RH2m");
 				}
 				this.h[i]=(int)(humidity/24);
 				this.w[i]=(int)(double)wind/24;
 				this.t[i]=(int)(double)tmp;
 
 			}
-			
-			
-			
-
-
-
-
-		}catch(ParseException pe){
-
-			System.out.println("position: " + pe.getPosition());
-			System.out.println(pe);
-		}
-
-
 
 	}
 }
